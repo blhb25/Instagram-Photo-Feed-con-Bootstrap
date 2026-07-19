@@ -1,174 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Feed with Bootstrap</title>
-    <!-- Bootstrap Styling link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- Fontawesome link (For the icons) -->
-    <script src="https://kit.fontawesome.com/072e5df971.js" crossorigin="anonymous"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A responsive photo feed built with Bootstrap.">
+  <title>Enjoying the programming</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="light-mode">
-    <!-- Navbar -->
-    <nav class="navbar navbar-light bg-light py-3">
-        <div class="container-fluid">
-            <div class="d-flex w-100 justify-content-between">
-                <div>
-                    <i class="fa-brands fa-instagram fa-xl"></i>
-                    <h5 class="d-inline-block fs-5">Instagram</h5>
-                </div>
-                <div class="d-flex align-right justify-content-end">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-success me-2" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        Create a new post
-                    </button>
-                    <!-- Dark/Light Mode Toggle -->
-                    <button id="theme-toggle" class="btn btn-outline-secondary me-2">
-                        <i class="fa-solid fa-moon"></i>
-                    </button>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-gear"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Accesibility</a></li>
-                            <li><a class="dropdown-item" href="#">Privacy and Data</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item text-danger" href="#">Log out</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <header class="site-header sticky-top">
+    <nav class="navbar container py-3" aria-label="Main navigation">
+      <a class="navbar-brand" href="#feed" aria-label="Enjoying the programming home"><span class="brand-mark">&lt;/&gt;</span>Enjoying the programming</a>
+      <div class="ms-auto d-flex align-items-center gap-2">
+        <button id="theme-toggle" class="icon-button" type="button" aria-label="Activate dark mode" title="Change theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+        <button class="btn btn-dark rounded-pill px-3 px-sm-4" type="button" data-bs-toggle="modal" data-bs-target="#newPostModal"><i class="fa-solid fa-plus me-1" aria-hidden="true"></i><span class="d-none d-sm-inline">New post</span></button>
+      </div>
     </nav>
-
-    <!-- Modal Body -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create a new post</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h6>Caption:</h6>
-                    <textarea class="form-control" placeholder="Add the caption of your post here"
-                        id="floatingTextarea2"></textarea>
-                    <div class="row p-2">
-                        <button class="col-1 border rounded p-1 m-1 btn-light">
-                            <i class="fa-solid fa-camera"></i>
-                        </button>
-                        <button class="col-1 border rounded p-1 m-1 btn-light">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Publish</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toggle Grid -->
-    <div class="container-fluid p-2">
-        <ul class="nav nav-pill justify-content-center" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                    role="tab" aria-controls="home" aria-selected="true"><i
-                        class="fa-solid fa-table-cells"></i></a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                    role="tab" aria-controls="profile" aria-selected="false"><i class="fa-solid fa-square"></i></a>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <!-- 3 photos per row grid -->
-            <div class="tab-pane fade show active overflow-hidden" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="row">
-                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://images.unsplash.com/photo-1738682085346-6a6faff97fb1?q=80&w=1320&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt=""></div>
-                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://plus.unsplash.com/premium_photo-1697385274805-11605cb60626?q=80&w=1078&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt=""></div>
-                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://images.unsplash.com/photo-1738707060349-c92b5b15bf80?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt=""></div>
-                </div>
-                <div class="row">
-                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://images.unsplash.com/photo-1738707060473-a23914a02d8a?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt=""></div>
-                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://images.unsplash.com/photo-1738603752061-f8fb60217f23?q=80&w=1036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt=""></div>
-                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://images.unsplash.com/photo-1738696693336-7a24cea4e6f8?q=80&w=1263&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt=""></div>
-                </div>
-                <div class="row">
-                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://plus.unsplash.com/premium_photo-1738614647383-0435fcb26a55?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt=""></div>
-                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://plus.unsplash.com/premium_photo-1679064287823-fbd549bf47dd?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt=""></div>
-                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://plus.unsplash.com/premium_photo-1731621417541-d4c7a9acf205?q=80&w=1094&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt=""></div>
-                </div>
-            </div>
-            <!-- 1 photo per row grid -->
-            <div class="tab-pane fade overflow-hidden" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <div class="row my-4">
-                    <div class="col-6 mx-auto border rounded p-0">
-                        <div class="d-flex p-2">
-                            <div class="w-100 fs-4">Priority!</div>
-                            <small class="align-bottom">08/26</small>
-                        </div>
-                        <img style="object-fit: cover;" src="https://images.unsplash.com/photo-1737920406899-e1cabc43a6a7?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100 col-12" alt=""/>
-                        <div class="p-2">
-                            <strong>204 Likes</strong>
-                            <p>You are important</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row my-4">
-                    <div class="col-6 mx-auto border rounded p-0">
-                        <div class="d-flex p-2">
-                            <div class="w-100 fs-4">Comfy</div>
-                            <small>04/09</small>
-                        </div>
-                        <img style="object-fit: cover;" src="https://images.unsplash.com/photo-1736580602204-db32ec420b0c?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100 col-12" alt=""/>
-                        <div class="p-2">
-                            <strong>26985 Likes</strong>
-                            <p>What comfy looks like</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row my-4">
-                    <div class="col-6 mx-auto border rounded p-0">
-                        <div class="d-flex p-2">
-                            <div class="w-100 fs-4">Perfect ilumination for a kitchen</div>
-                            <small>06/10</small>
-                        </div>
-                        <img style="object-fit: cover;" src="https://plus.unsplash.com/premium_photo-1736194026187-39e23ae676e0?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100 col-12" alt=""/>
-                        <div class="p-2">
-                            <strong>204 Likes</strong>
-                            <p>Take this idea for a ilumination</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap Functionalities link  -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
-    <!-- Custom JS -->
-    <script src="scripts.js"></script>
+  </header>
+  <main>
+    <section class="hero container" aria-labelledby="page-title">
+      <div><p class="eyebrow">Learn • Build • Create</p><h1 id="page-title">Enjoying the<br><em>programming.</em></h1></div>
+      <p class="hero-copy">Every language has its own magic, which is why it is important to understand how it can be used; this page is designed for those who wish to explore a world full of possibilities.</p>
+    </section>
+    <section class="container feed-controls" aria-label="Feed display controls">
+      <div><span class="feed-count">06 languages</span><span class="feed-divider" aria-hidden="true"></span><span class="feed-label">Programming collection</span></div>
+      <ul class="nav nav-pills view-switcher" role="tablist">
+        <li class="nav-item" role="presentation"><button class="nav-link active" id="grid-tab" data-bs-toggle="tab" data-bs-target="#grid-view" type="button" role="tab" aria-controls="grid-view" aria-selected="true" aria-label="Grid view"><i class="fa-solid fa-border-all"></i></button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="list-tab" data-bs-toggle="tab" data-bs-target="#list-view" type="button" role="tab" aria-controls="list-view" aria-selected="false" aria-label="List view"><i class="fa-solid fa-bars"></i></button></li>
+      </ul>
+    </section>
+    <section class="container pb-5" id="feed"><div class="tab-content"><div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-tab"><div class="photo-grid" id="photo-grid" aria-live="polite"></div></div><div class="tab-pane fade" id="list-view" role="tabpanel" aria-labelledby="list-tab"><div class="post-list" id="post-list" aria-live="polite"></div></div></div></section>
+  </main>
+  <footer class="container footer"><span>ENJOYING THE PROGRAMMING © 2026</span><span>Built for curious minds.</span></footer>
+  <div class="modal fade" id="newPostModal" tabindex="-1" aria-labelledby="newPostModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><form class="modal-content" id="new-post-form"><div class="modal-header border-0 pb-0"><div><p class="eyebrow mb-1">Add to the collection</p><h2 class="modal-title h4" id="newPostModalLabel">New language post</h2></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body pt-4"><label class="form-label" for="post-title">Language name</label><input class="form-control" id="post-title" maxlength="55" required placeholder="For example: TypeScript"><label class="form-label mt-3" for="post-caption">Why use it?</label><textarea class="form-control" id="post-caption" rows="3" maxlength="180" required placeholder="Describe its qualities and benefits."></textarea><label class="form-label mt-3" for="post-image">Logo URL <span class="text-secondary">(optional)</span></label><input class="form-control" id="post-image" type="url" placeholder="https://..."><p class="form-text mb-0">Use a freely licensed logo or leave this field empty.</p></div><div class="modal-footer border-0 pt-0"><button type="button" class="btn btn-link text-secondary" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-dark rounded-pill px-4">Publish post</button></div></form></div></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="scripts.js"></script>
 </body>
-
 </html>
