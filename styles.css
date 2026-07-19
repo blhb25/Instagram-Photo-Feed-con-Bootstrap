@@ -1,43 +1,418 @@
-/* Light Mode */
-body.light-mode {
-    background-color: #ffffff;
-    color: #000000;
+/* =========================
+   1. Design tokens
+   ========================= */
+:root {
+  --accent: #c75b38;
+  --ink: #20211e;
+  --line: #ddddd5;
+  --muted: #72736c;
+  --paper: #f8f7f2;
+  --shadow: 0 16px 40px rgba(35, 35, 29, 0.08);
+  --surface: #fffefa;
 }
 
-/* Dark Mode */
+/* =========================
+   2. Reset and base styles
+   ========================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* =========================
+   3. Header and navigation
+   ========================= */
+.site-header {
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.navbar-brand {
+  color: var(--ink);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.navbar-brand:hover {
+  color: var(--ink);
+}
+
+.brand-mark {
+  align-items: center;
+  background: var(--accent);
+  border-radius: 50%;
+  color: #ffffff;
+  display: inline-flex;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  height: 1.9rem;
+  justify-content: center;
+  letter-spacing: -0.08em;
+  margin-right: 0.35rem;
+  width: 1.9rem;
+}
+
+.btn-dark {
+  background: var(--ink);
+  border-color: var(--ink);
+  font-weight: 600;
+}
+
+.btn-dark:hover,
+.btn-dark:focus {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.icon-button {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  height: 2.45rem;
+  transition: 0.2s ease;
+  width: 2.45rem;
+}
+
+.icon-button:hover {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+/* =========================
+   4. Introductory content
+   ========================= */
+.hero {
+  align-items: end;
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
+  padding-bottom: 4.5rem;
+  padding-top: clamp(3.5rem, 9vw, 7.5rem);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.7rem, 6vw, 5.6rem);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.hero h1 em {
+  color: var(--accent);
+}
+
+.hero-copy {
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0 0 0.4rem;
+  max-width: 22rem;
+}
+
+/* =========================
+   5. Feed controls
+   ========================= */
+.feed-controls {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.feed-count {
+  font-weight: 700;
+}
+
+.feed-label {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.feed-divider {
+  background: var(--line);
+  display: inline-block;
+  height: 0.9rem;
+  margin: 0 0.65rem;
+  vertical-align: middle;
+  width: 1px;
+}
+
+.view-switcher {
+  gap: 0.35rem;
+}
+
+.view-switcher .nav-link {
+  background: transparent;
+  border-radius: 50%;
+  color: var(--muted);
+  height: 2.2rem;
+  padding: 0.45rem;
+  text-align: center;
+  width: 2.2rem;
+}
+
+.view-switcher .nav-link.active {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+/* =========================
+   6. Grid cards
+   ========================= */
+.photo-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.photo-card {
+  align-items: center;
+  aspect-ratio: 1 / 1.12;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.photo-card:nth-child(4n + 1) {
+  aspect-ratio: auto;
+  grid-row: span 2;
+}
+
+.photo-card:nth-child(6n + 1) { background: #f4e0d9; }
+.photo-card:nth-child(6n + 2) { background: #dcecf5; }
+.photo-card:nth-child(6n + 3) { background: #f9edb9; }
+.photo-card:nth-child(6n + 4) { background: #dce9dc; }
+.photo-card:nth-child(6n + 5) { background: #f2ddd1; }
+.photo-card:nth-child(6n + 6) { background: #e5dff1; }
+
+.photo-card img {
+  height: 60%;
+  object-fit: contain;
+  transition: transform 0.45s ease;
+  width: 60%;
+}
+
+.photo-card:hover img {
+  transform: scale(1.08);
+}
+
+.photo-overlay {
+  background: linear-gradient(transparent 28%, rgba(0, 0, 0, 0.78));
+  bottom: 0;
+  color: #ffffff;
+  left: 0;
+  opacity: 0;
+  padding: 1.25rem;
+  position: absolute;
+  right: 0;
+  transition: opacity 0.25s ease;
+}
+
+.photo-card:hover .photo-overlay,
+.photo-card:focus-within .photo-overlay {
+  opacity: 1;
+}
+
+.photo-overlay span {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.photo-overlay h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0.2rem 0;
+}
+
+.photo-overlay p {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* =========================
+   7. List cards
+   ========================= */
+.post-list {
+  display: grid;
+  gap: 1.5rem;
+  margin: 0 auto;
+  max-width: 50rem;
+}
+
+.list-card {
+  align-items: stretch;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: minmax(11rem, 32%) 1fr;
+}
+
+.list-card img {
+  align-self: center;
+  justify-self: center;
+  max-height: 8rem;
+  max-width: 60%;
+  object-fit: contain;
+}
+
+.list-content {
+  border-left: 1px solid var(--line);
+  padding: 1.35rem;
+}
+
+.list-meta {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.list-card h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  margin: 0.4rem 0;
+}
+
+.list-card p {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* =========================
+   8. Modal and footer
+   ========================= */
+.modal-content {
+  background: var(--surface);
+  border: 0;
+  border-radius: 1rem;
+  color: var(--ink);
+}
+
+.form-control {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.form-control:focus {
+  background: transparent;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(199, 91, 56, 0.15);
+}
+
+.footer {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  display: flex;
+  font-size: 0.75rem;
+  justify-content: space-between;
+  letter-spacing: 0.08em;
+  padding-bottom: 2rem;
+  padding-top: 1.25rem;
+  text-transform: uppercase;
+}
+
+/* =========================
+   9. Dark theme
+   ========================= */
 body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
+  --ink: #f3f1e9;
+  --line: #363732;
+  --muted: #b3b2a9;
+  --paper: #171815;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+  --surface: #20211d;
 }
 
-body.dark-mode .navbar {
-    background-color: #1f1f1f !important;
+.dark-mode .btn-close {
+  filter: invert(1);
 }
 
-body.dark-mode .nav-pill .nav-link {
-    color: #ffffff;
+.dark-mode .form-control::placeholder {
+  color: #898a81;
 }
 
-body.dark-mode .nav-pill .nav-link.active {
-    color: #0d6efd;
-}
+/* =========================
+   10. Responsive layout
+   ========================= */
+@media (max-width: 575.98px) {
+  .navbar-brand {
+    font-size: 0.9rem;
+  }
 
-body.dark-mode .modal-content {
-    background-color: #1f1f1f;
-    color: #ffffff;
-}
+  .hero {
+    align-items: start;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 3rem;
+  }
 
-body.dark-mode .btn-secondary {
-    background-color: #333333;
-    border-color: #333333;
-}
+  .hero-copy {
+    max-width: 20rem;
+  }
 
-body.dark-mode .btn-outline-secondary {
-    border-color: #ffffff;
-    color: #ffffff;
-}
+  .photo-grid {
+    gap: 0.5rem;
+  }
 
-body.dark-mode .btn-outline-secondary:hover {
-    background-color: #ffffff;
-    color: #000000;
+  .photo-overlay {
+    opacity: 1;
+    padding: 0.75rem;
+  }
+
+  .photo-overlay h2 {
+    font-size: 0.88rem;
+  }
+
+  .photo-overlay p,
+  .photo-overlay span {
+    display: none;
+  }
+
+  .list-card {
+    grid-template-columns: 1fr;
+  }
+
+  .list-card img {
+    margin: 1.5rem auto 0;
+    max-height: 6rem;
+  }
+
+  .list-content {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
 }
